@@ -31,7 +31,7 @@ class Router extends Controller {
     }
   }
 
-  private def createBlockChainLink(tx: Transaction): Unit = {
+  private def createBlockChainLink(tx: Transaction): Unit = this.synchronized {
     DbOp.lastBlockHash().onComplete {
       case Success(s) =>
         val txHash = md5Hash(tx)
